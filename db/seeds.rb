@@ -7,6 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 TimeLog.create([
-  {duration_hours: 1, description: 'Initial Task', status: TimeLog::STATUS_BILLED},
+  {duration_hours: 1, description: 'Initial Task', status: :billed},
   {duration_hours: 3, description: 'Follow up Task'},
 ])

@@ -4,10 +4,43 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+require("jquery")
+
+
+import '../stylesheets/application'
+import 'materialize-css/dist/js/materialize'
+
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
+
+import "controllers"
+
+
+$(document).on("turbo:frame-render", () => {
+  init_material_select()
+})
+
+$(document).on("turbo:render", () => {
+  console.log('ok')
+  init_material_select()
+})
+
+$(document).on("turbo:load", () => {
+  init_material_select()
+})
+
+$(document).on("turbo:before-cache", () => {
+  $('select').formSelect('destroy')
+});
+
+function init_material_select() {
+  $('.dropdown-trigger').dropdown();
+  $('select').formSelect()
+  M.updateTextFields()
+}
+
+// ===============================
