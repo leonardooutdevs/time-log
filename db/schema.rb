@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(version: 2021_08_06_030935) do
 
   create_table "time_logs", force: :cascade do |t|
-    t.integer "duration_hours"
-    t.text "description"
-    t.string "status"
+    t.integer "duration_hours", null: false
+    t.text "description", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["status"], name: "index_time_logs_on_status"

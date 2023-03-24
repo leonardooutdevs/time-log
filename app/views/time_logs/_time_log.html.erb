@@ -1,8 +1,26 @@
-<tr>
-  <td><%= time_log.duration_hours %></td>
-  <td><%= time_log.description %></td>
-  <td><%= time_log.status %></td>
-  <td>
-    <%= link_to 'edit', edit_time_log_path(time_log) %>
-  </td>
-</tr>
+<%= turbo_frame_tag dom_id(time_log) do  %>
+  <div class='row tbody'>
+    <div class='col l4'>
+      <%= time_log.duration_hours %>
+    </div>
+    <div class='col l4'>
+      <%= time_log.description %>
+    </div>
+    <div class='col l2'>
+      <%= time_log.status %>
+    </div>
+    <div class='col l2'>
+      <%= link_to time_log_path(time_log, time_log: { status: :billed}), method: :patch do %>
+        <i class="material-icons green-text">monetization_on</i>
+      <% end if time_log.pending?%>
+
+      <%= link_to edit_time_log_path(time_log) do %>
+        <i class="material-icons blue-text">edit</i>
+      <% end %>
+
+      <%= link_to time_log_path(time_log), method: :delete, data: { confirm: t('.destroy_confirmation') } do %>
+        <i class="material-icons red-text">delete</i>
+      <% end %>
+    </div>
+  </div>
+<% end %>
